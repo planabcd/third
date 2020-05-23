@@ -22,25 +22,48 @@ public class SubarraySumEqualsK560 {
     //来源：力扣（LeetCode）
     //链接：https://leetcode-cn.com/problems/subarray-sum-equals-k
     public static void main(String[] args) {
-        new SubarraySumEqualsK560().subarraySum(new int[]{3,4,7,2,-3,1,4,2},7);
+
+        new SubarraySumEqualsK560().subarraySum(new int[]{3, 4, 7, 2, -3, 1, 4, 2}, 7);
     }
 
     public int subarraySum(int[] nums, int k) {
         if(nums.length==0){
             return 0;
         }
-        Map<Integer,Integer> sum2Count = new HashMap<>();
-        sum2Count.put(0,1);
+        Map<Integer,Integer> sum2countMap = new HashMap<>();
+        sum2countMap.put(0,1);
+        int sum = 0;
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum+= nums[i];
+            if(sum2countMap.get(sum-k)!=null){
+                res += sum2countMap.get(sum-k);
+            }
+            Integer count = sum2countMap.get(sum);
+            if(count==null){
+                count=0;
+            }
+            sum2countMap.put(sum,count+1);
+        }
+        return res;
+    }
+
+    public int subarraySum1(int[] nums, int k) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        Map<Integer, Integer> sum2Count = new HashMap<>();
+        sum2Count.put(0, 1);
         //sum[j]-sum[i]=k
         int count = 0;
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
-            sum+=nums[i];
-            if(sum2Count.get(sum-k)!=null){
-                count += sum2Count.get(sum-k);
+            sum += nums[i];
+            if (sum2Count.get(sum - k) != null) {
+                count += sum2Count.get(sum - k);
             }
             Integer oldCount = sum2Count.get(sum);
-            sum2Count.put(sum,oldCount==null?1:oldCount+1);
+            sum2Count.put(sum, oldCount == null ? 1 : oldCount + 1);
         }
         return count;
     }

@@ -38,32 +38,28 @@ public class WordBreak139 {
         List<String> dictList = new ArrayList<String>();
         dictList.add("leet");
         dictList.add("code");
-        System.out.println(new WordBreak139().wordBreak("leetcode",dictList));
+        System.out.println(new WordBreak139().wordBreak("leetcode", dictList));
     }
 
     public boolean wordBreak(String s, List<String> wordDict) {
-        if(s.length()==0){
+        if (s.length() == 0) {
             return true;
         }
-        Set<String> wordSet = new HashSet<>();
-        for (String word : wordDict) {
-            wordSet.add(word);
-        }
-
+        Set<String> wordSet = new HashSet<>(wordDict);
         //dp[i] = true表示以i结尾的字符可以由wordDict里的单词组成
         boolean[] dp = new boolean[s.length()];
         for (int right = 0; right < s.length(); right++) {
-            if(wordSet.contains(s.substring(0,right+1))){
+            if (wordSet.contains(s.substring(0, right + 1))) {
                 dp[right] = true;
                 continue;
             }
             for (int left = 0; left < right; left++) {
-                if(dp[left] && wordSet.contains(s.substring(left+1,right+1))){
+                if (dp[left] && wordSet.contains(s.substring(left + 1, right + 1))) {
                     dp[right] = true;
                     break;
                 }
             }
         }
-        return dp[s.length()-1];
+        return dp[s.length() - 1];
     }
 }

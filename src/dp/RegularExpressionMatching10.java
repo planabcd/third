@@ -51,6 +51,10 @@ public class RegularExpressionMatching10 {
 //    p = "mis*is*p*."
 //    输出: false
 //    https://leetcode-cn.com/problems/regular-expression-matching/
+    public static void main(String[] args) {
+        System.out.println(new RegularExpressionMatching10().isMatch("", "a*b*"));
+    }
+
     public boolean isMatch(String s, String p) {
         int m = s.length();
         int n = p.length();
@@ -83,6 +87,12 @@ public class RegularExpressionMatching10 {
                     }
                 }
             }
+        }
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                System.out.print(dp[i][j]+"\t");
+            }
+            System.out.println();
         }
         return dp[m][n];
     }

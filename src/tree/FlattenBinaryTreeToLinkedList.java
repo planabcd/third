@@ -28,6 +28,30 @@ public class FlattenBinaryTreeToLinkedList {
         if(root==null){
             return;
         }
+        //root的左子树的最右节点作为root的右子树的父节点
+        while(root!=null){
+            if(root.left!=null){
+                TreeNode temp = root.left;
+                while(temp.right!=null){
+                    temp = temp.right;
+                }
+                //temp就是root的左子树的最右节点
+                //temp的右子树成为root的右子树的父节点
+                temp.right = root.right;
+                //root的左子树成为root的右子树
+                root.right = root.left;
+                //root的左子树为空
+                root.left = null;
+            }
+            //root顺着右子树往下移
+            root = root.right;
+        }
+    }
+
+        public void flatten2(TreeNode root) {
+        if(root==null){
+            return;
+        }
         while(root!=null){
             if(root.left==null){
                 root = root.right;

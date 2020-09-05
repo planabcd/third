@@ -41,7 +41,7 @@ public class PredictTheWinner486 {
         int[][] dp = new int[nums.length][nums.length];
         //dp[i][j]表示当前选手先手拿的话比对方多的最大分数
         for (int i = 0; i < nums.length; i++) {
-            dp[i][i] = nums[i];
+            dp[i][i] = nums [i];
         }
         for (int i = nums.length-2; i >=0 ; i--) {
             for (int j = i+1; j< nums.length; j++) {
